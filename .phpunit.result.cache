@@ -1,0 +1,1 @@
+C:30:"PHPUnit\Runner\TestResultCache":309:{a:2:{s:7:"defects";a:2:{s:51:"TribeHired\TwigLocale\Test\MainTest::testTextSimple";i:4;s:53:"TribeHired\TwigLocale\Test\MainTest::testTextWithData";i:4;}s:5:"times";a:2:{s:51:"TribeHired\TwigLocale\Test\MainTest::testTextSimple";d:2.318;s:53:"TribeHired\TwigLocale\Test\MainTest::testTextWithData";d:46.186;}}}
