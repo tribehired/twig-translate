@@ -1,5 +1,5 @@
 {
-    "name": "wannfq/twig-locale",
+    "name": "tribehired/twig-locale",
     "description": "Twig extension for text localization.",
     "require": {
         "twig/twig": "^2.6"
