@@ -11,24 +11,24 @@ use Twig\TwigFunction;
  */
 class Translate extends AbstractExtension
 {
-    private $filepath;
-    private $locale;
+    /** @var array $dictionary */
+    private $dictionary;
 
     /**
      * Translate constructor.
-     * @param $path
+     * @param string $path
      * @param string $locale
      */
-    public function __construct($path, $locale = 'en')
+    public function __construct(string $path, string $locale = 'en')
     {
-        $this->filepath = $path;
-        $this->locale = $locale;
+        $dictionaryFile = include $path;
+        $this->dictionary = $dictionaryFile[$locale];
     }
 
     /**
-     * @return array|\Twig_Function[]
+     * @return array
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('trans', [$this, 'translate']),
@@ -39,20 +39,18 @@ class Translate extends AbstractExtension
      * @param string $key
      * @param array $data
      * @return string
+     * @throws \Exception
      */
-    public function translate(string $key, array $data = [])
+    public function translate(string $key, array $data = []): string
     {
-        $dictionaryFile = include $this->filepath;
-        $dictionaryData = $dictionaryFile[$this->locale];
-
-        if (!array_key_exists($key, $dictionaryData)) {
-            return $key;
+        if (!array_key_exists($key, $this->dictionary)) {
+            throw new \Exception("Key does not exist in dictionary");
         }
 
         if (!count($data)) {
-            return $dictionaryData[$key];
+            return $this->dictionary[$key];
         }
 
-        return strtr($dictionaryData[$key], $data);
+        return strtr($this->dictionary[$key], $data);
     }
 }
