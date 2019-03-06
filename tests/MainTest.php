@@ -5,13 +5,15 @@ namespace TribeHired\TwigLocale\Test;
 use PHPUnit\Framework\TestCase;
 use TribeHired\TwigLocale\Translate;
 
+/**
+ * Class MainTest
+ * @package TribeHired\TwigLocale\Test
+ */
 class MainTest extends TestCase
 {
+    /** @var string $path */
     private $path = __DIR__.'/dictionary.php';
 
-    /**
-     *
-     */
     public function testTextSimple()
     {
         $translator = new Translate($this->path);
@@ -20,9 +22,6 @@ class MainTest extends TestCase
         $this->assertEquals($expected, $text);
     }
 
-    /**
-     *
-     */
     public function testTextWithData()
     {
         $translator = new Translate($this->path);
