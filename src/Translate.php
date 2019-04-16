@@ -19,10 +19,9 @@ class Translate extends AbstractExtension
      * @param string $path
      * @param string $locale
      */
-    public function __construct(string $path, string $locale = 'en')
+    public function __construct(string $path, string $locale)
     {
-        $dictionaryFile = include $path;
-        $this->dictionary = $dictionaryFile[$locale];
+        $this->dictionary = include $path.'/'.$locale.'.php';
     }
 
     /**
@@ -36,21 +35,26 @@ class Translate extends AbstractExtension
     }
 
     /**
-     * @param string $key
+     * @param string $term
      * @param array $data
      * @return string
      * @throws \Exception
      */
-    public function translate(string $key, array $data = []): string
+    public function translate(string $term, array $data = []): string
     {
-        if (!array_key_exists($key, $this->dictionary)) {
-            throw new \Exception("Key does not exist in dictionary");
+        if (!array_key_exists($term, $this->dictionary)) {
+            throw new \Exception("Term does not exist in dictionary");
         }
 
         if (!count($data)) {
-            return $this->dictionary[$key];
+            return $this->dictionary[$term];
         }
 
-        return strtr($this->dictionary[$key], $data);
+        $dataItems = [];
+        foreach ($data as $key => $value) {
+            $dataItems[':'.$key] = $value;
+        }
+
+        return strtr($this->dictionary[$term], $dataItems);
     }
 }

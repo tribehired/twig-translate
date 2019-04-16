@@ -12,22 +12,28 @@ use TribeHired\TwigLocale\Translate;
 class MainTest extends TestCase
 {
     /** @var string $path */
-    private $path = __DIR__.'/dictionary.php';
+    private $path = __DIR__ . '/dictionary';
 
+    /**
+     * @throws \Exception
+     */
     public function testTextSimple()
     {
-        $translator = new Translate($this->path);
+        $translator = new Translate($this->path, 'en');
         $expected = 'Hello world!';
         $text = $translator->translate('textSimple');
         $this->assertEquals($expected, $text);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function testTextWithData()
     {
-        $translator = new Translate($this->path);
+        $translator = new Translate($this->path, 'en');
         $value = 'apple';
         $expected= 'The data value is: '.$value.'.';
-        $text = $translator->translate('textWithData', [':data' => $value]);
+        $text = $translator->translate('textWithData', ['data' => $value]);
         $this->assertEquals($expected, $text);
     }
 }
