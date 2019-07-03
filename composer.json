@@ -1,6 +1,6 @@
 {
-    "name": "tribehired/twig-locale",
-    "description": "Twig extension for text localization.",
+    "name": "tribehired/twig-translate",
+    "description": "Twig extension for mapped text translation.",
     "require": {
         "twig/twig": "^2.6"
     },
