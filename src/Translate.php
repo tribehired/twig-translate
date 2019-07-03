@@ -1,6 +1,6 @@
 <?php
 
-namespace TribeHired\TwigLocale;
+namespace TribeHired\TwigTranslate;
 
 use Twig\Error\Error;
 use Twig\Extension\AbstractExtension;
@@ -8,7 +8,7 @@ use Twig\TwigFunction;
 
 /**
  * Class Translate
- * @package TribeHired\TwigLocale
+ * @package TribeHired\TwigTranslate
  */
 class Translate extends AbstractExtension
 {

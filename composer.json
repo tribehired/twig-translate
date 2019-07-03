@@ -13,12 +13,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "TribeHired\\TwigLocale\\": "src/"
+            "TribeHired\\TwigTranslate\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "TribeHired\\TwigLocale\\Test\\": "tests/"
+            "TribeHired\\TwigTranslate\\Test\\": "tests/"
         }
     },
     "require-dev": {
