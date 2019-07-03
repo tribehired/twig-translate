@@ -2,6 +2,7 @@
 
 namespace TribeHired\TwigLocale;
 
+use Twig\Error\Error;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -16,12 +17,16 @@ class Translate extends AbstractExtension
 
     /**
      * Translate constructor.
-     * @param string $path
-     * @param string $locale
+     * @param string $dictionaryPath
+     * @throws Error
      */
-    public function __construct(string $path, string $locale)
+    public function __construct(string $dictionaryPath)
     {
-        $this->dictionary = include $path.'/'.$locale.'.php';
+        try {
+            $this->dictionary = include $dictionaryPath;
+        } catch (\Exception $e) {
+            throw new Error('Unable to include dictionary path "' . $dictionaryPath . '"');
+        }
     }
 
     /**
@@ -38,12 +43,11 @@ class Translate extends AbstractExtension
      * @param string $term
      * @param array $data
      * @return string
-     * @throws \Exception
      */
     public function translate(string $term, array $data = []): string
     {
         if (!array_key_exists($term, $this->dictionary)) {
-            throw new \Exception("Term does not exist in dictionary");
+            return $term;
         }
 
         if (!count($data)) {
@@ -52,7 +56,7 @@ class Translate extends AbstractExtension
 
         $dataItems = [];
         foreach ($data as $key => $value) {
-            $dataItems[':'.$key] = $value;
+            $dataItems[':' . $key] = $value;
         }
 
         return strtr($this->dictionary[$term], $dataItems);
