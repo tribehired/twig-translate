@@ -2,7 +2,7 @@
     "name": "tribehired/twig-translate",
     "description": "Twig extension for mapped text translation.",
     "require": {
-        "twig/twig": "^2.6"
+        "twig/twig": "^3.11"
     },
     "license": "MIT",
     "authors": [
